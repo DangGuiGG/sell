@@ -1,6 +1,6 @@
 package com.gxk.dao;
 
-import com.gxk.dataobject.ProductInfo;
+import com.gxk.POJO.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

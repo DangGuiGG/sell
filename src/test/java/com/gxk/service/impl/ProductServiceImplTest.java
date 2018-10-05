@@ -1,6 +1,6 @@
 package com.gxk.service.impl;
 
-import com.gxk.dataobject.ProductInfo;
+import com.gxk.POJO.ProductInfo;
 import com.gxk.enums.ProductStatusEnum;
 import org.junit.Assert;
 import org.junit.Test;

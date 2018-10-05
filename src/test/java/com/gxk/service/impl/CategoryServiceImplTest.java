@@ -1,6 +1,6 @@
 package com.gxk.service.impl;
 
-import com.gxk.dataobject.ProductCategory;
+import com.gxk.POJO.ProductCategory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

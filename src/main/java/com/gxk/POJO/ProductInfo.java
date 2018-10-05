@@ -1,4 +1,4 @@
-package com.gxk.dataobject;
+package com.gxk.POJO;
 
 import lombok.Data;
 

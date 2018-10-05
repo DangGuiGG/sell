@@ -1,6 +1,6 @@
 package com.gxk.service;
 
-import com.gxk.dataobject.ProductCategory;
+import com.gxk.POJO.ProductCategory;
 
 import java.util.List;
 

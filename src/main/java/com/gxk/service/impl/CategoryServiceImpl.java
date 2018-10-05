@@ -1,7 +1,7 @@
 package com.gxk.service.impl;
 
 import com.gxk.dao.ProductCategoryRepository;
-import com.gxk.dataobject.ProductCategory;
+import com.gxk.POJO.ProductCategory;
 import com.gxk.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

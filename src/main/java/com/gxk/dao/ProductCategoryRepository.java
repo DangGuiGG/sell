@@ -1,6 +1,6 @@
 package com.gxk.dao;
 
-import com.gxk.dataobject.ProductCategory;
+import com.gxk.POJO.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

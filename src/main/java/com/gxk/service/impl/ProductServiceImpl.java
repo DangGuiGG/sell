@@ -1,7 +1,7 @@
 package com.gxk.service.impl;
 
 import com.gxk.dao.ProductInfoRepository;
-import com.gxk.dataobject.ProductInfo;
+import com.gxk.POJO.ProductInfo;
 import com.gxk.enums.ProductStatusEnum;
 import com.gxk.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

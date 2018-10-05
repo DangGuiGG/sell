@@ -1,6 +1,6 @@
 package com.gxk.service;
 
-import com.gxk.dataobject.ProductInfo;
+import com.gxk.POJO.ProductInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

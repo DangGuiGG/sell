@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class ResultVO<T> {
 
-    /**错误码*/
+    /**错误码 0成功1不成功*/
     private Integer code;
 
     /**提示信息*/

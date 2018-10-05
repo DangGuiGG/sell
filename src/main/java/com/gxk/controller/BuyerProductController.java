@@ -7,6 +7,8 @@ import com.gxk.VO.ProductVO;
 import com.gxk.VO.ResultVO;
 import com.gxk.service.CategoryService;
 import com.gxk.service.ProductService;
+import com.gxk.util.ResultVOUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,26 +36,29 @@ public class BuyerProductController {
         //精简方法，Java8 lambda,获取所有类目编号
         List<Integer> categoryTypeList = productInfoList.stream()
                 .map(e -> e.getCategoryType()).collect(Collectors.toList());
-        List<ProductCategory> productCategorieList = categoryService.findByCategoryTypeIn(categoryTypeList);
+        //获取类目列
+        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
         //3.数据拼装
+        List<ProductVO> productVOList = new ArrayList<>();
+        for (ProductCategory productCategory : productCategoryList) {
+            ProductVO productVO = new ProductVO();
+            productVO.setCategoryName(productCategory.getCategoryName());
+            productVO.setCtegoryType(productCategory.getCategoryType());
 
+            List<ProductInfoVO> productInfoVOList = new ArrayList<>();
+            //添加所有上架商品到ProductInfoVO中
+            for (ProductInfo productInfo : productInfoList) {
+                if (productInfo.getCategoryType().equals(productCategory.getCategoryType())) {
+                    ProductInfoVO productInfoVO = new ProductInfoVO();
+                    //将productInfo中的值付给productInfoVO
+                    BeanUtils.copyProperties(productInfo, productInfoVO);
+                    productInfoVOList.add(productInfoVO);
+                }
+            }
+            productVO.setProductVOList(productInfoVOList);
+            productVOList.add(productVO);
+        }
 
-
-
-
-
-
-
-        ResultVO resultVO = new ResultVO();
-        ProductVO productVO = new ProductVO();
-        ProductInfoVO productInfoVO = new ProductInfoVO();
-
-        productVO.setProductVOList(Arrays.asList(productInfoVO));
-
-        resultVO.setData(Arrays.asList(productVO));
-        resultVO.setCode(0);
-        resultVO.setMsg("成功");
-
-        return resultVO;
+        return ResultVOUtil.success(productVOList);
     }
 }

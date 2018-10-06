@@ -1,7 +1,6 @@
 package com.gxk.VO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.gxk.POJO.ProductInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public class ProductVO {
     private String categoryName;
 
     @JsonProperty("type")
-    private Integer ctegoryType;
+    private Integer categoryType;
 
     @JsonProperty("foods")
     private List<ProductInfoVO> productVOList;

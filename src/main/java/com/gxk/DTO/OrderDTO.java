@@ -1,22 +1,22 @@
-package com.gxk.POJO;
+package com.gxk.DTO;
 
+import com.gxk.POJO.OrderDetail;
 import com.gxk.enums.OrderStatusEnum;
 import com.gxk.enums.PayStatusEnum;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-@Entity
+/**
+ * 数据传输对象
+ */
 @Data
-@DynamicUpdate//字段自动更新
-public class OrderMaster {
+public class OrderDTO {
 
     /** 订单ID */
-    @Id
     private String orderId;
 
     /** 买家名字 */
@@ -35,10 +35,10 @@ public class OrderMaster {
     private BigDecimal orderAmount;
 
     /** 订单状态,默认为0新下单 */
-    private Integer orderStatus = OrderStatusEnum.NEW.getCode();
+    private Integer orderStatus;
 
     /** 支付状态,默认为0未支付 */
-    private Integer payStatus = PayStatusEnum.WAIT.getCode();
+    private Integer payStatus;
 
     /** 创建时间 */
     private Date createTime;
@@ -46,5 +46,6 @@ public class OrderMaster {
     /** 更新时间 */
     private Date updateTime;
 
-
+    /*用户订单列*/
+    List<OrderDetail> orderDetailList;
 }

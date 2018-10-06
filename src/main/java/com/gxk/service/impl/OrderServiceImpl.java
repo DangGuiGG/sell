@@ -34,20 +34,29 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductService productService;
+
     @Autowired
     private OrderDetailRepository orderDetailRepository;
+
     @Autowired
     private OrderMasterRepository orderMasterRepository;
 
+    /**
+     * 创建订单
+     * @param orderDTO 订单数据传送类,包含各种信息以及用户订单列表
+     * @return
+     */
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
-
+        //用随机数设置订单ID
         String orderId = KeyUtil.getUniqueKey();
+        //设置订单总金额
         BigDecimal orderAmount = new BigDecimal(BigInteger.ZERO);
 
-        //1.查询商品（数量，价格）
+        //1.查询订单商品列中所含的每一个商品（数量，价格）
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
+            //根据 订单详情 中所含的 商品ID 查找对应商品信息
             ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
             if (productInfo == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
@@ -55,11 +64,13 @@ public class OrderServiceImpl implements OrderService {
             //2.计算订单总价
             orderAmount = productInfo.getProductPrice()
                     .multiply(new BigDecimal(orderDetail.getProductQuantity()))
-                        .add(orderAmount);
+                    .add(orderAmount);
             //订单详情入库
-            orderDetail.setOrderId(orderId);
+            //设置订单详情ID
             orderDetail.setDetailId(KeyUtil.getUniqueKey());
-            BeanUtils.copyProperties(productInfo,orderDetail);
+            //设置订单ID
+            orderDetail.setOrderId(orderId);
+            BeanUtils.copyProperties(productInfo, orderDetail);
             orderDetailRepository.save(orderDetail);
         }
 

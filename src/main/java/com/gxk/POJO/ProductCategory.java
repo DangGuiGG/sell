@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 /**
  * 类目
  * 驼峰自动映射  product_category如果不同则使用
- *
  * @Table(name = "...")
  */
 @Entity

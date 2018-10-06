@@ -46,6 +46,6 @@ public class OrderDTO {
     /** 更新时间 */
     private Date updateTime;
 
-    /*用户订单列*/
+    /** 用户订单列 */
     List<OrderDetail> orderDetailList;
 }

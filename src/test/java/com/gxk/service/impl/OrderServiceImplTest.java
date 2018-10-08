@@ -3,6 +3,7 @@ package com.gxk.service.impl;
 import com.gxk.DTO.OrderDTO;
 import com.gxk.POJO.OrderDetail;
 import com.gxk.enums.OrderStatusEnum;
+import com.gxk.enums.PayStatusEnum;
 import com.gxk.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -69,7 +70,7 @@ public class OrderServiceImplTest {
     public void findList() {
         PageRequest request = new PageRequest(0, 2);
         Page<OrderDTO> orderDTOPage =
-                orderService.findList(BUYER_OPEN_ID, request);
+                orderService.findList("ew3euwhd7sjw9diwkq", request);
         Assert.assertNotEquals(0, orderDTOPage.getTotalElements());
     }
 
@@ -77,14 +78,20 @@ public class OrderServiceImplTest {
     public void cancel() {
         OrderDTO orderDTO = orderService.findOne(ORDER_ID);
         OrderDTO result = orderService.cancel(orderDTO);
-        Assert.assertNotEquals(OrderStatusEnum.CANCEL.getCode(), result.getOrderStatus());
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(), result.getOrderStatus());
     }
 
     @Test
     public void finish() {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISH.getCode(), result.getOrderStatus());
     }
 
     @Test
     public void paid() {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
     }
 }

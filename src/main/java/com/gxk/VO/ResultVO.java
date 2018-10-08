@@ -1,11 +1,13 @@
 package com.gxk.VO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
  * http请求返回给最外层对象
  */
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)//不按返回Json中数值为NULL的属性值
 public class ResultVO<T> {
 
     /**错误码 0成功1不成功*/
